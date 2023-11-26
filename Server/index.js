@@ -12,17 +12,20 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors({ origin: '*' }));
 
+const authRoutes = require('./src/routes/authRoutes')
+
 //MongoDB Node.js Driver version 3.6.0 
 // If you use these in version 4.0.0 this will deprecate
-const connectionParams = {
-    useNewUrlParser: true,
-    useUnifiedTopology: true
-}
+// const connectionParams = {
+//     useNewUrlParser: true,
+//     useUnifiedTopology: true
+// }
 
 const port = process.env.PORT || 3000;
 
 mongoose.connect(process.env.MONGODB_URL).then(() => {
     console.log('Mongoose connected to db');
+
     app.listen(port, () =>
     console.log(`App listening on port ${port}!`)
 )
@@ -36,6 +39,9 @@ mongoose.connect(process.env.MONGODB_URL).then(() => {
 // console.log('Mongoose connection is disconnected.')
 // });
 
+app.use('/MERN',authRoutes);
+
 app.use('/', (req,res)=>{
     res.json('Welcome to nodeJS ..!');
 });
+

@@ -1,0 +1,49 @@
+.mainDiv, .mainSignInDiv{
+    border: 1px solid #ddd;
+}
+.regLabel{
+    text-align: left;
+}
+.row{
+    padding-bottom: 10px;
+}
+.mainDiv h4, .mainSignInDiv h4{
+    text-align: center;
+    color: white;
+    background-color: blueviolet;
+    margin-bottom: 15px;
+    height: 35px;
+}
+.regButtons{
+    display: flex;
+    gap: 15px;
+    margin-top: 30px;
+}
+.regButtons .btn-success{
+    border-radius: 20px;
+}
+.regButtons .btn-outline-danger{
+    border-radius: 20px;
+}
+.forgotPW{
+    color: black;
+    text-align: end;
+    text-decoration: underline;
+    margin-top: 5px;
+    cursor: pointer;
+}
+.regSignIn{
+text-align: center;
+margin-top: 15px;
+}
+.regSignIn span{
+    cursor: pointer;
+    text-decoration: underline;
+    color: blueviolet;
+    margin-left: 5px;
+}
+.form-control, .form-select{
+    border: none;
+    background-color: #ddd3;
+    border-radius: 15px;
+}
