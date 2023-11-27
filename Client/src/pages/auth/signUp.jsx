@@ -1,97 +1,162 @@
 import "./auth.css";
-import HomeHeader from '../../components/homeHeader';
-import {Link} from 'react-router-dom';
+import HomeHeader from "../../components/homeHeader";
+import { Link } from "react-router-dom";
+import { useState } from "react";
 
-const signUp = () => {
+const SignUp = () => {
+  const [credentials, setCredentials] = useState({
+    name: "",
+    teamName: "",
+    mobileNo: "",
+    email: "",
+    DOB: "",
+    state: "",
+    password: "",
+    confPassword: "",
+  });
+  const [isSubmitted, setisSubmitted] = useState(false);
+
+  const handleOnChange = (e) => {
+    setCredentials({ ...credentials, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      if (
+        !credentials.name ||
+        !credentials.teamName ||
+        !credentials.mobileNo ||
+        !credentials.email ||
+        !credentials.DOB ||
+        !credentials.state ||
+        !credentials.password ||
+        !credentials.confPassword
+      ) {
+        alert('Enter all mandatory fields!')
+        setisSubmitted(true);
+      }
+    } catch (err) {
+      true;
+    }
+  };
   return (
     <>
-    <HomeHeader />
-    <div className="mainDiv">
-      <h4>SignUp</h4>
-      <div className="formDiv">
-        <div className="row">
-          <div className="col-6">
-            <h6 className="regLabel">Name</h6>
-            <input
-              type="text"
-              className="form-control"
-              placeholder="Enter Name"
-            />
+      <HomeHeader />
+      <div className="mainDiv">
+        <h4>SignUp</h4>
+        <div className="formDiv">
+          <div className="row">
+            <div className="col-6">
+              <h6 className="regLabel">Name</h6>
+              <input
+                type="text"
+                className="form-control"
+                placeholder="Enter Name"
+                name="name"
+                style={{
+                  borderColor: isSubmitted && !credentials.name ? "red" : "",
+                }}
+                onChange={handleOnChange}
+              />
+            </div>
+            <div className="col-6">
+              <h6 className="regLabel">Team Name</h6>
+              <input
+                type="text"
+                className="form-control"
+                placeholder="Enter Team Name"
+                name="teamName"
+                style={{
+                  borderColor: isSubmitted && !credentials.teamName ? "red" : "",
+                }}
+                onChange={handleOnChange}
+              />
+            </div>
           </div>
-          <div className="col-6">
-            <h6 className="regLabel">Team Name</h6>
-            <input
-              type="text"
-              className="form-control"
-              placeholder="Enter Team Name"
-            />
+          <div className="row">
+            <div className="col-6">
+              <h6 className="regLabel">Mobile Number</h6>
+              <input
+                type="text"
+                className="form-control"
+                placeholder="Enter Mobile Number"
+                name="mobileNo"
+                onChange={handleOnChange}
+              />
+            </div>
+            <div className="col-6">
+              <h6 className="regLabel">Email</h6>
+              <input
+                type="text"
+                className="form-control"
+                placeholder="Enter Email"
+                name="email"
+                onChange={handleOnChange}
+              />
+            </div>
           </div>
-        </div>
-        <div className="row">
-          <div className="col-6">
-            <h6 className="regLabel">Mobile Number</h6>
-            <input
-              type="text"
-              className="form-control"
-              placeholder="Enter Mobile Number"
-            />
+          <div className="row">
+            <div className="col-6">
+              <h6 className="regLabel">Date of Birth</h6>
+              <input
+                type="date"
+                className="form-control"
+                placeholder="Select Date of Birth"
+                name="DOB"
+                onChange={handleOnChange}
+              />
+            </div>
+            <div className="col-6">
+              <h6 className="regLabel">State</h6>
+              <select
+                className="form-select"
+                name="state"
+                onChange={handleOnChange}
+              >
+                <option value="">--select--</option>
+                <option value="Andhra Pradesh">Andhra Pradesh</option>
+                <option value="Telangana">Telangana</option>
+                <option value="Maharastra">Maharastra</option>
+              </select>
+            </div>
           </div>
-          <div className="col-6">
-            <h6 className="regLabel">Email</h6>
-            <input
-              type="text"
-              className="form-control"
-              placeholder="Enter Email"
-            />
-          </div>
-        </div>
-        <div className="row">
-          <div className="col-6">
-            <h6 className="regLabel">Date of Birth</h6>
-            <input
-              type="date"
-              className="form-control"
-              placeholder="Select Date of Birth"
-            />
-          </div>
-          <div className="col-6">
-            <h6 className="regLabel">State</h6>
-            <select className="form-select">
-              <option value="">--select--</option>
-              <option value="">Andhra Pradesh</option>
-              <option value="">Telangana</option>
-              <option value="">Maharastra</option>
-            </select>
-          </div>
-        </div>
 
-        <div className="row">
-          <div className="col-6">
-            <h6 className="regLabel">Password</h6>
-            <input
-              type="password"
-              className="form-control"
-              placeholder="Enter Password"
-            />
+          <div className="row">
+            <div className="col-6">
+              <h6 className="regLabel">Password</h6>
+              <input
+                type="password"
+                className="form-control"
+                placeholder="Enter Password"
+                name="password"
+                onChange={handleOnChange}
+              />
+            </div>
+            <div className="col-6">
+              <h6 className="regLabel">Confirm Password</h6>
+              <input
+                type="text"
+                className="form-control"
+                placeholder="Enter Confirm Password"
+                name="confPassword"
+                onChange={handleOnChange}
+              />
+            </div>
           </div>
-          <div className="col-6">
-            <h6 className="regLabel">Confirm Password</h6>
-            <input
-              type="text"
-              className="form-control"
-              placeholder="Enter Confirm Password"
-            />
+          <div className="regButtons">
+            <button className="btn btn-success w-100" onClick={handleSubmit}>
+              SignUp
+            </button>
+            <button className="btn btn-outline-danger w-100">Clear</button>
           </div>
+          <h6 className="regSignIn">
+            Already i have an account!<Link to="/auth/signIn">SignIn</Link>
+          </h6>
         </div>
-        <div className="regButtons">
-          <button className="btn btn-success w-100">SignUp</button>
-          <button className="btn btn-outline-danger w-100">Clear</button>
-        </div>
-        <h6 className="regSignIn">Already i have an account!<Link to="/auth/signIn">SignIn</Link></h6>
       </div>
-    </div>
     </>
   );
 };
 
-export default signUp;
+export default SignUp;

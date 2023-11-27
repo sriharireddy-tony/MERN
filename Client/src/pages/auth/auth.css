@@ -43,7 +43,6 @@ margin-top: 15px;
     margin-left: 5px;
 }
 .form-control, .form-select{
-    border: none;
     background-color: #ddd3;
     border-radius: 15px;
 }
