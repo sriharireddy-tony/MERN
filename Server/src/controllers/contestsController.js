@@ -1,0 +1,1 @@
+const contestsModel = require("../models/contestsModel");

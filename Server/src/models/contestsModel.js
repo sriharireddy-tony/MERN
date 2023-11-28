@@ -36,8 +36,8 @@ const contestsSchema = new mongoose.Schema({
     createdOn : {
         type : Date,
         default : new Date()
-    }
-
+    },
+    belongsToMatchesModel: { type: mongoose.Schema.Types.ObjectId, ref: 'matchesList' }
 })
 
 module.exports = mongoose.model('contestsList', contestsSchema)
