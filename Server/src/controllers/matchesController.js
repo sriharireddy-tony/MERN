@@ -1,4 +1,5 @@
 const matchesModel = require("../models/matchesModel");
+const SuccessHandler = require("../middlewares/successHandler");
 
 createMatch = async(req,res)=>{
     try{
@@ -14,10 +15,10 @@ createMatch = async(req,res)=>{
 
 getMatchList = async (req, res, next) => {
     try {
-      const matches = await matchesMode.find();
+      const matches = await matchesModel.find();
+      SuccessHandler(200,'Data getting successfull',matches)(req,res);
       res.status(200).json({ message: 'Match list getting successfull', data: matches });
     } catch (error) {
-    //   res.status(500).json({ message: 'Internal server error' });
     next(error);
     }
   };
