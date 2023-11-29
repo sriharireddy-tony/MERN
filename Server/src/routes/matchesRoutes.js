@@ -6,6 +6,7 @@ const matchesController = require('../controllers/matchesController.js');
 
 router.post('/createMatch', matchesController.createMatch);
 router.get('/getMatchList', matchesController.getMatchList);
+router.delete('/deleteMatch/:_id',matchesController.deleteMatch);
 
 
 module.exports = router;

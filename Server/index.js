@@ -13,8 +13,10 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors({ origin: '*' }));
 
-const authRoutes = require('./src/routes/authRoutes')
-const matchRoutes = require('./src/routes/matchesRoutes')
+const authRoutes = require('./src/routes/authRoutes');
+const matchRoutes = require('./src/routes/matchesRoutes');
+const contestRoutes = require('./src/routes/contestRoutes');
+const playerRoutes = require('./src/routes/playerRoutes');
 
 //MongoDB Node.js Driver version 3.6.0 
 // If you use these in version 4.0.0 this will deprecate
@@ -43,10 +45,14 @@ mongoose.connect(process.env.MONGODB_URL).then(() => {
 
 app.use('/auth',authRoutes);
 app.use('/match',matchRoutes);
+app.use('/contest',contestRoutes);
+app.use('/player',playerRoutes);
 
-app.use('/', (req,res)=>{
-    res.json('Welcome to nodeJS ..!');
-});
 
 app.use(ErrorHandler);
+
+// app.use('/', (req,res)=>{
+//     res.json('Welcome to nodeJS ..!');
+// });
+
 
