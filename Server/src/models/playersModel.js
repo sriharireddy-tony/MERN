@@ -3,10 +3,11 @@ const mongoose  = require('mongoose');
 const playersSchema = new mongoose.Schema({
     playerName : {
         type : String,
-        required : true
+        required : true,
+        unique : true
     },
     teamCode : {
-        type : Date,
+        type : String,
         required : true
     },
     selectedPercent : {
@@ -34,7 +35,8 @@ const playersSchema = new mongoose.Schema({
     createdOn : {
         type : Date,
         default : new Date()
-    }
+    },
+    matchModelId: { type: mongoose.Schema.Types.ObjectId, ref: 'matchesList' }
 })
 
 module.exports = mongoose.model('playersList', playersSchema)

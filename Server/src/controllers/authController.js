@@ -34,13 +34,9 @@ register = async (req, res) => {
         })
       
         await auth.create(req.body).then(userResponse => {
-          if (userResponse && userResponse._id) {
            return res.status(201).json({message: 'User registered successfully', data: userResponse });
-          }
         }).catch(err => {
-          if (err) {
             res.status(500).json({ message: 'User registration failed!' });
-          }
         });
     } catch(err){
         res.status(500).json({ message: 'Internal server error' });
