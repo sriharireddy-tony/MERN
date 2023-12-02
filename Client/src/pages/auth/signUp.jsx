@@ -33,9 +33,17 @@ const SignUp = () => {
         !credentials.password ||
         !credentials.confPassword
       ) {
-        alert('Enter all mandatory fields!')
+        alert('Enter all mandatory fields!');
         setisSubmitted(true);
+      } else if(credentials.password != credentials.confPassword){
+        alert('Passwords must match!');
+        // setCredentials((prevCredentials) => ({
+        //   ...prevCredentials,
+        //   confPassword: '',
+        // }));
+        setCredentials({ ...credentials, ['confPassword']: '' });
       }
+     
     } catch (err) {
       true;
     }
@@ -82,6 +90,9 @@ const SignUp = () => {
                 className="form-control"
                 placeholder="Enter Mobile Number"
                 name="mobileNo"
+                style={{
+                  borderColor: isSubmitted && !credentials.mobileNo ? "red" : "",
+                }}
                 onChange={handleOnChange}
               />
             </div>
@@ -92,6 +103,9 @@ const SignUp = () => {
                 className="form-control"
                 placeholder="Enter Email"
                 name="email"
+                style={{
+                  borderColor: isSubmitted && !credentials.email ? "red" : "",
+                }}
                 onChange={handleOnChange}
               />
             </div>
@@ -104,6 +118,9 @@ const SignUp = () => {
                 className="form-control"
                 placeholder="Select Date of Birth"
                 name="DOB"
+                style={{
+                  borderColor: isSubmitted && !credentials.DOB ? "red" : "",
+                }}
                 onChange={handleOnChange}
               />
             </div>
@@ -112,6 +129,9 @@ const SignUp = () => {
               <select
                 className="form-select"
                 name="state"
+                style={{
+                  borderColor: isSubmitted && !credentials.state ? "red" : "",
+                }}
                 onChange={handleOnChange}
               >
                 <option value="">--select--</option>
@@ -130,6 +150,9 @@ const SignUp = () => {
                 className="form-control"
                 placeholder="Enter Password"
                 name="password"
+                style={{
+                  borderColor: isSubmitted && !credentials.password ? "red" : "",
+                }}
                 onChange={handleOnChange}
               />
             </div>
@@ -140,12 +163,16 @@ const SignUp = () => {
                 className="form-control"
                 placeholder="Enter Confirm Password"
                 name="confPassword"
+                value={credentials.confPassword}
+                style={{
+                  borderColor: isSubmitted && !credentials.confPassword ? "red" : "",
+                }}
                 onChange={handleOnChange}
               />
             </div>
           </div>
           <div className="regButtons">
-            <button className="btn btn-success w-100" onClick={handleSubmit}>
+            <button className="btn btn-success w-100" type="button" onClick={handleSubmit}>
               SignUp
             </button>
             <button className="btn btn-outline-danger w-100">Clear</button>
