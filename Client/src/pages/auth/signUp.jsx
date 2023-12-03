@@ -2,8 +2,12 @@ import "./auth.css";
 import HomeHeader from "../../components/homeHeader";
 import { Link } from "react-router-dom";
 import { useState } from "react";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const SignUp = () => {
+  const navigate = useNavigate();
+
   const [credentials, setCredentials] = useState({
     name: "",
     teamName: "",
@@ -33,19 +37,28 @@ const SignUp = () => {
         !credentials.password ||
         !credentials.confPassword
       ) {
-        alert('Enter all mandatory fields!');
+        alert("Enter all mandatory fields!");
         setisSubmitted(true);
-      } else if(credentials.password != credentials.confPassword){
-        alert('Passwords must match!');
+      } else if (credentials.password != credentials.confPassword) {
+        alert("Passwords must match!");
         // setCredentials((prevCredentials) => ({
         //   ...prevCredentials,
         //   confPassword: '',
         // }));
-        setCredentials({ ...credentials, ['confPassword']: '' });
+        setCredentials({ ...credentials, ["confPassword"]: "" });
+      } else {
+        // eslint-disable-next-line no-unused-vars
+        const { confPassword, ...payload } = credentials;
+        const sendSignUp = await axios.post(
+          "http://localhost:3000/auth/signUp",
+          payload
+        );
+        const response = await sendSignUp.data;
+        alert(response.message);
+        navigate("/auth/signIn");
       }
-     
     } catch (err) {
-      true;
+      alert(err.response.data.message);
     }
   };
   return (
@@ -76,7 +89,8 @@ const SignUp = () => {
                 placeholder="Enter Team Name"
                 name="teamName"
                 style={{
-                  borderColor: isSubmitted && !credentials.teamName ? "red" : "",
+                  borderColor:
+                    isSubmitted && !credentials.teamName ? "red" : "",
                 }}
                 onChange={handleOnChange}
               />
@@ -91,7 +105,8 @@ const SignUp = () => {
                 placeholder="Enter Mobile Number"
                 name="mobileNo"
                 style={{
-                  borderColor: isSubmitted && !credentials.mobileNo ? "red" : "",
+                  borderColor:
+                    isSubmitted && !credentials.mobileNo ? "red" : "",
                 }}
                 onChange={handleOnChange}
               />
@@ -151,7 +166,8 @@ const SignUp = () => {
                 placeholder="Enter Password"
                 name="password"
                 style={{
-                  borderColor: isSubmitted && !credentials.password ? "red" : "",
+                  borderColor:
+                    isSubmitted && !credentials.password ? "red" : "",
                 }}
                 onChange={handleOnChange}
               />
@@ -165,14 +181,19 @@ const SignUp = () => {
                 name="confPassword"
                 value={credentials.confPassword}
                 style={{
-                  borderColor: isSubmitted && !credentials.confPassword ? "red" : "",
+                  borderColor:
+                    isSubmitted && !credentials.confPassword ? "red" : "",
                 }}
                 onChange={handleOnChange}
               />
             </div>
           </div>
           <div className="regButtons">
-            <button className="btn btn-success w-100" type="button" onClick={handleSubmit}>
+            <button
+              className="btn btn-success w-100"
+              type="button"
+              onClick={handleSubmit}
+            >
               SignUp
             </button>
             <button className="btn btn-outline-danger w-100">Clear</button>

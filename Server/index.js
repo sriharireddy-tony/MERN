@@ -51,8 +51,8 @@ app.use('/player',playerRoutes);
 
 app.use(ErrorHandler);
 
-// app.use('/', (req,res)=>{
-//     res.json('Welcome to nodeJS ..!');
-// });
+app.use('/', (req,res)=>{
+    res.json('Welcome to nodeJS ..!');
+});
 
 

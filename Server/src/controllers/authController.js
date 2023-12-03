@@ -34,7 +34,7 @@ register = async (req, res) => {
         })
       
         await auth.create(req.body).then(userResponse => {
-           return res.status(201).json({message: 'User registered successfully', data: userResponse });
+           return res.status(201).json({message: 'User registered successfully'});
         }).catch(err => {
             res.status(500).json({ message: 'User registration failed!' });
         });
@@ -68,7 +68,8 @@ register = async (req, res) => {
           if (!err && bcryptRes) {
             const accessToken = jwt.sign({ id: existUser._id, name: existUser.name, role: existUser.isAdmin }, accessKey, { expiresIn: accessTime });
             const refreshToken = jwt.sign({ id: existUser._id, name: existUser.name, role: existUser.isAdmin }, refreshKey, { expiresIn: refreshTime });
-            res.json({ status: 'ok', data: { accessToken, refreshToken, userName : existUser.name, role: existUser.isAdmin } });
+            res.json({ status: 'ok', accessToken, refreshToken, userName : existUser.name, role: existUser.isAdmin,
+                                              message : 'Login Successfull!' });
           } else if (!bcryptRes) {
             res.status(401).json({ data: { bcryptRes }, message: 'Invalid Credentials' });
           }
