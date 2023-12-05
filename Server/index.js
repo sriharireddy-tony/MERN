@@ -17,6 +17,7 @@ const authRoutes = require('./src/routes/authRoutes');
 const matchRoutes = require('./src/routes/matchesRoutes');
 const contestRoutes = require('./src/routes/contestRoutes');
 const playerRoutes = require('./src/routes/playerRoutes');
+const docRoutes = require('./src/routes/docsCRUD')
 
 //MongoDB Node.js Driver version 3.6.0 
 // If you use these in version 4.0.0 this will deprecate
@@ -47,7 +48,7 @@ app.use('/auth',authRoutes);
 app.use('/match',matchRoutes);
 app.use('/contest',contestRoutes);
 app.use('/player',playerRoutes);
-
+app.use('/doc',docRoutes);
 
 app.use(ErrorHandler);
 
