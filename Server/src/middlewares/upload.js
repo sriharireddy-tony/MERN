@@ -10,6 +10,9 @@ let storage = multer.diskStorage({
   },
 });
 
-var upload = multer({storage}).single('file'); 
+var upload = multer({
+  storage : storage,
+  limits: { fileSize: maxSize }
+}).single('file'); 
 
 module.exports = upload;
