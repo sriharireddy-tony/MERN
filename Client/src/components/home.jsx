@@ -17,12 +17,12 @@ const home = () => {
           <h3 className="text-center">
             Its easy to start playing on{" "}
             <span className="text-danger">
-              <b>Dream11</b>
+              <b>MERN11</b>
             </span>
           </h3>
           <h5 className="text-center mt-5">
             <span style={{ backgroundColor: "rgb(187, 230, 250)" }}>
-              Play Fantasy Cricket on Dream11 and win big!
+              Play Fantasy Cricket on MERN11 and win big!
             </span>
           </h5>
           <p className="mt-5">
@@ -31,8 +31,8 @@ const home = () => {
             players playing in real life matches. Create your team to win points
             based on all the players performance in a live game.Ready to
             challenge other sports fans? Watch this video to learn how to play
-            on Dream11 and get started now. Compete with sports fans, make a
-            perfect Dream11 team with the best combination of players as per
+            on MERN11 and get started now. Compete with sports fans, make a
+            perfect MERN11 team with the best combination of players as per
             your knowledge and skill and win big.
           </p>
           <div>

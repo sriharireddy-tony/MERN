@@ -20,9 +20,21 @@
 }
 
 /* for laptops and PC */
-@media (min-width: 767px) {
-  .appCSS {
-    padding: 0px 12vw;
+@media only screen 
+and (min-width : 768px) 
+and (max-width : 1024px) {
+  .matchBody {
+    display: flex;
+  }
+}
+
+@media only screen and (min-width: 1025px) {
+  .matchBody {
+    display: flex;
+    /* padding: 0px 15vw; */
+  }
+  .responsive {
+    padding: 0px 15vw;
   }
 
   .formDiv {
@@ -43,4 +55,9 @@
     transform: translate(-50%, -50%);
     width: 30%;
   }
+
+  .headTextCenter{
+    padding-left: 13vw;
+}
+  
 }
