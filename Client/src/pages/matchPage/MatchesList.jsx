@@ -3,13 +3,18 @@ import image from '../../assets/Images/userPng1.jpg'
 import './matchPage.css'
 import axiosHttpHandler from '../../services/AxiosHttpHandler'
 import { getMatchList } from '../../utils/apiService'
+import { getReduxMatchList } from '../../redux/actions/matchList'
+import { useDispatch } from 'react-redux'
 
 const MatchesList = () => {
+
+    const dispatch = useDispatch();
 
   useEffect(()=>{
     axiosHttpHandler.get(getMatchList)
     .then((res) => {
-      console.log('Response data:', res);
+    //   console.log('Response data:', res.data);
+      dispatch(getReduxMatchList(res.data))
     })
     .catch((err) => {
       console.error('Error fetching data:', err);
