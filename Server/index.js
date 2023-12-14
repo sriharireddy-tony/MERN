@@ -27,14 +27,16 @@ const docRoutes = require("./src/routes/docsCRUD");
 
 const port = process.env.PORT || 3000;
 
-mongoose
-  .connect(process.env.MONGODB_URL)
-  .then(() => {
-    console.log("Mongoose connected to db");
+// mongoose
+//   .connect(process.env.MONGODB_URL)
+//   .then(() => {
+//     console.log("Mongoose connected to db");
 
-    app.listen(port, () => console.log(`App listening on port ${port}!`));
-  })
-  .catch((err) => console.error("Failed to connect to MongoDB", err));
+//     app.listen(port, () => console.log(`App listening on port ${port}!`));
+//   })
+//   .catch((err) => console.error("Failed to connect to MongoDB", err));
+
+  app.listen(port, () => console.log(`App listening on port ${port}!`));
 
 // mongoose.connection.on('connected', ()=>{
 //     console.log('Mongoose connected to db')
