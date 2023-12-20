@@ -55,7 +55,6 @@ app.use("/doc", docRoutes);
 app.use(ErrorHandler);
 
 
-
 app.all("*", (req, res, next) => {
   res.status(404).json({
     status: "404",

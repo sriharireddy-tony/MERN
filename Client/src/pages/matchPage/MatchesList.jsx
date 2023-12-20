@@ -1,4 +1,7 @@
-import { useEffect } from 'react'
+/* eslint-disable no-const-assign */
+/* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable no-unused-vars */
+import { useEffect, useState } from 'react'
 import image from '../../assets/Images/userPng1.jpg'
 import './matchPage.css'
 import axiosHttpHandler from '../../services/AxiosHttpHandler'
@@ -10,13 +13,15 @@ import { useNavigate } from 'react-router-dom'
 const MatchesList = () => {
 
     const dispatch = useDispatch();
-    const navigate = useNavigate();
+    var [matchListArr, setMatchListArr] = useState([]);
 
   useEffect(()=>{
-    axiosHttpHandler.get(getMatchList)
+   axiosHttpHandler.get(getMatchList)
     .then((res) => {
-    //   console.log('Response data:', res.data);
-      dispatch(getReduxMatchList(res.data))
+        setMatchListArr(res.data);
+        console.log(res.data);
+        console.log(matchListArr);
+    //   dispatch(getReduxMatchList(res.data))
     })
     .catch((err) => {
       console.error('Error fetching data:', err);
@@ -27,10 +32,11 @@ const MatchesList = () => {
 
   return (
     <div className='matchBody'>
-            <div className="matchCard" onClick={()=>{ navigate('/contestList')}}>
+        {matchListArr.length !=0 && matchListArr.map((match, index) => (
+            <div key={index} className="matchCard">
                 <div className="matchCardRow">
                     <div className="col-12">
-                        ICC World Cup 2023
+                        {match.leagueName}
                     </div>
                     <div className="col-8">
                     </div>
@@ -38,67 +44,33 @@ const MatchesList = () => {
                 <div className="matchCardRow1">
                     <div className="col-4">
                         <div className="image">
-                            <img src={image} alt="teamIcon" className="imageIcon" />&nbsp; IND
+                            <img src={image} alt="teamIcon" className="imageIcon" />&nbsp; {match.teamCode1}
                         </div>
                         <div className='teamName1'>
-                            India
+                        {match.teamName1}
                         </div>
                     </div>
                     <div className="col-4 text-center">
-                        01:30 PM
+                    {match.matchStartTime}
                     </div>
                     <div className="col-4">
                         <div className="teamImage2 image">
-                            AUS &nbsp;<img src={image} alt="teamIcon" className="imageIcon" />
+                        {match.teamCode2} &nbsp;<img src={image} alt="teamIcon" className="imageIcon" />
                         </div>
                         <div className='teamName2'>
-                            Australia
+                        {match.teamName2}
                         </div>
                     </div>
                 </div>
                 <hr className="hr" />
                 <div className="matchCardRow2">
                     <div className="col-12">
-                        Mega Size
+                        Mega Size :
                     </div>
                 </div>
             </div>
-            <div className="matchCard">
-                <div className="matchCardRow">
-                    <div className="col-12">
-                        ICC World Cup 2023
-                    </div>
-                    <div className="col-8">
-                    </div>
-                </div>
-                <div className="matchCardRow1">
-                    <div className="col-4">
-                        <div className="image">
-                            <img src={image} alt="teamIcon" className="imageIcon" />&nbsp; IND
-                        </div>
-                        <div className='teamName1'>
-                            India
-                        </div>
-                    </div>
-                    <div className="col-4 text-center">
-                        01:30 PM
-                    </div>
-                    <div className="col-4">
-                        <div className="teamImage2 image">
-                            AUS &nbsp;<img src={image} alt="teamIcon" className="imageIcon" />
-                        </div>
-                        <div className='teamName2'>
-                            Australia
-                        </div>
-                    </div>
-                </div>
-                <hr className="hr" />
-                <div className="matchCardRow2">
-                    <div className="col-12">
-                        Mega Size
-                    </div>
-                </div>
-            </div>
+        ))}
+           
     </div>
   )
 }
