@@ -10,6 +10,7 @@ import MatchPageHeader from './pages/matchPage/MatchPageHeader';
 import MatchesList from './pages/matchPage/MatchesList';
 import MatchListKabaddi from './pages/matchPage/matchListKabaddi';
 import MatchListFootball from './pages/matchPage/matchListFootball';
+import ContestHeader from './pages/contestsList/contestHeader';
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
           <Route path="kabaddi" element={<MatchListKabaddi/>} />
           <Route path="football" element={<MatchListFootball/>} />
          </Route>
+         <Route path="contestList" element={<ContestHeader/>} />
         </Routes>
       </Router>
     </div>

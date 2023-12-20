@@ -5,10 +5,12 @@ import axiosHttpHandler from '../../services/AxiosHttpHandler'
 import { getMatchList } from '../../utils/apiService'
 import { getReduxMatchList } from '../../redux/actions/matchList'
 import { useDispatch } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
 
 const MatchesList = () => {
 
     const dispatch = useDispatch();
+    const navigate = useNavigate();
 
   useEffect(()=>{
     axiosHttpHandler.get(getMatchList)
@@ -25,7 +27,7 @@ const MatchesList = () => {
 
   return (
     <div className='matchBody'>
-            <div className="matchCard">
+            <div className="matchCard" onClick={()=>{ navigate('/contestList')}}>
                 <div className="matchCardRow">
                     <div className="col-12">
                         ICC World Cup 2023
