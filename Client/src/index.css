@@ -17,6 +17,13 @@
   .mainSignInDiv{
     padding-top: 20vh;
   }
+  .matchCard {
+    /* border: 1px solid #ddd; */
+    margin: 12px 5px;
+    border-radius: 8px;
+    box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
+    width: 97%;
+  }
 }
 
 /* for laptops and PC */
@@ -25,13 +32,16 @@ and (min-width : 768px)
 and (max-width : 1024px) {
   .matchBody {
     display: flex;
+    flex-flow: wrap ;
   }
 }
 
 @media only screen and (min-width: 1025px) {
   .matchBody {
     display: flex;
-    /* padding: 0px 15vw; */
+    justify-content: center;
+    flex-flow: wrap ;
+    padding: 0px 5vw;
   }
   .responsive {
     padding: 0px 15vw;

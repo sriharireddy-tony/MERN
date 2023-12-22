@@ -1,11 +1,62 @@
-import React from 'react'
+import React, { useState } from 'react'
+import { useEffect } from 'react';
+import axiosHttpHandler from '../../services/AxiosHttpHandler';
+import { getContestByRefId } from '../../utils/apiService';
+import './Contest.css'
 
 
 const ContestList = () => {
+
+    const [contestList, setContestList] = useState([]);
+
+    useEffect(()=>{
+        axiosHttpHandler.get(getContestByRefId+"/6565e1a6f155a31b05793cd4")
+         .then((res) => {
+            setContestList(res.data);
+             console.log(contestList);
+         //   dispatch(getReduxMatchList(res.data))
+         })
+         .catch((err) => {
+           console.error('Error fetching data:', err);
+         });
+     
+       },[])
+    
+
     return (
-        <div>
-            
-        </div>
+        <div className='matchBody'>
+        {contestList.length !=0 && contestList.map((contest, index) => (
+
+            <div key={index} className="matchCard">
+                <div className="matchCardRow">
+                    <div className="col-12">
+                        Max Prize Pool
+                    </div>
+                    <div className="col-8">
+                    </div>
+                </div>
+                <div className="matchCardRow1">
+                    <div className="col-4">
+                        <h6>66</h6>
+                    </div>
+                    <div className="col-4 text-center">
+                  
+                    </div>
+                    <div className="col-4 text-end">
+                        <button type='button' className='btn btn-success'>17</button>
+                    </div>
+                </div>
+                <hr className="hr" />
+                <div className="matchCardRow2">
+                    <div className="col-12">
+                        <span>First :</span>
+                        <span>Win :</span>
+                    </div>
+                </div>
+            </div>
+         ))}
+           
+    </div>
     )
 }
 
