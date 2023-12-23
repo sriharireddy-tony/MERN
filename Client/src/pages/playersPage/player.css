@@ -1,0 +1,15 @@
+.flexBetween{
+    display: flex;
+    justify-content: space-between;
+}
+.contestHeaderColor {
+    background-color: blueviolet;
+    color: white;
+    height: 50px;
+    padding-top: 12px;
+    position: sticky;
+    top: 0;
+  }
+  .cursor{
+    cursor: pointer;
+  }

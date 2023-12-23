@@ -61,9 +61,8 @@ app.all("*", (req, res, next) => {
     success: "false",
     message: "Route can not found",
   });
-
-//   app.use("/", (req, res) => {
-//     res.json("Welcome to nodeJS ..!");
-//   });
-
 });
+
+  // app.use("/", (req, res) => {
+  //   res.json("Welcome to nodeJS ..!");
+  // });

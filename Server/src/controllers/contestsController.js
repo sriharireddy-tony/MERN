@@ -35,7 +35,7 @@ deleteContest = async (req, res, next) => {
 
 getContestByRefId = async(req,res,next) =>{
     try{
-        const refId = req.params.refId;
+        const refId = req.params._id;
         const contests = await contestsModel.find({matchModelId : refId})
             return SuccessHandler(200, 'Contests getting successfull', contests)(req, res);
     } catch(err){

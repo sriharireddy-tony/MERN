@@ -1,16 +1,17 @@
 import React from 'react'
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
-import './Contest.css'
+import './player.css'
 import NotificationsIcon from "@mui/icons-material/Notifications";
-import ContestList from './contestList';
+import PlayerList from './playerList';
 import { useNavigate } from 'react-router-dom';
 
-const ContestHeader = () => {
+
+const PlayerHeader = () =>{
     const navigate = useNavigate();
 
-    return (
-        <div className="">
-            <div className='flexBetween contestHeaderColor'>
+    return(
+        <div>
+       <div className='flexBetween contestHeaderColor'>
                 <div className='cursor' style={{marginLeft:'1vw'}} onClick={() => navigate(-1)}>
                     <ArrowBackIcon />
                 </div>
@@ -23,10 +24,10 @@ const ContestHeader = () => {
             </div>
 
             <div className="responsive">
-                <ContestList />
+                <PlayerList />
             </div>
         </div>
     )
 }
 
-export default ContestHeader;
+export default PlayerHeader;

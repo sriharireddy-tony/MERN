@@ -8,10 +8,11 @@ import axiosHttpHandler from '../../services/AxiosHttpHandler'
 import { getMatchList } from '../../utils/apiService'
 import { getReduxMatchList } from '../../redux/actions/matchList'
 import { useDispatch } from 'react-redux'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate,Link } from 'react-router-dom'
 
 const MatchesList = () => {
 
+    const navigate = useNavigate();
     const dispatch = useDispatch();
     var [matchListArr, setMatchListArr] = useState([]);
 
@@ -33,7 +34,7 @@ const MatchesList = () => {
   return (
     <div className='matchBody'>
         {matchListArr.length !=0 && matchListArr.map((match, index) => (
-            <div key={index} className="matchCard">
+            <div key={index} className="matchCard" onClick={()=> navigate(`/contestList/${match._id}`)}>
                 <div className="matchCardRow">
                     <div className="col-12">
                         {match.leagueName}

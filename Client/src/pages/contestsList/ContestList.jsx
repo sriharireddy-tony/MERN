@@ -3,14 +3,16 @@ import { useEffect } from 'react';
 import axiosHttpHandler from '../../services/AxiosHttpHandler';
 import { getContestByRefId } from '../../utils/apiService';
 import './Contest.css'
+import { useParams } from 'react-router-dom';
 
 
 const ContestList = () => {
 
+    const params = useParams();
     const [contestList, setContestList] = useState([]);
 
     useEffect(()=>{
-        axiosHttpHandler.get(getContestByRefId+"/6565e1a6f155a31b05793cd4")
+        axiosHttpHandler.get(getContestByRefId+`/${params._id}`)
          .then((res) => {
             setContestList(res.data);
              console.log(contestList);

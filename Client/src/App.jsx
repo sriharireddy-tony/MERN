@@ -11,6 +11,7 @@ import MatchesList from './pages/matchPage/MatchesList';
 import MatchListKabaddi from './pages/matchPage/matchListKabaddi';
 import MatchListFootball from './pages/matchPage/matchListFootball';
 import ContestHeader from './pages/contestsList/contestHeader';
+import PlayerHeader from './pages/playersPage/playerHeader';
 
 function App() {
   return (
@@ -25,8 +26,9 @@ function App() {
           <Route path="kabaddi" element={<MatchListKabaddi/>} />
           <Route path="football" element={<MatchListFootball/>} />
          </Route>
-         <Route path="contestList" element={<ContestHeader/>} />
-        </Routes>
+         <Route path="contestList/:_id" element={<ContestHeader/>} />
+         <Route path="playersList/:_id" element={<PlayerHeader/>} />
+ e        </Routes>
       </Router>
     </div>
   )
