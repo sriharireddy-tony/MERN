@@ -29,7 +29,7 @@ const ContestList = () => {
         <div className='matchBody'>
         {contestList.length !=0 && contestList.map((contest, index) => (
 
-            <div key={index} className="matchCard">
+            <div key={index} className="contestCard">
                 <div className="matchCardRow">
                     <div className="col-12">
                         Max Prize Pool
