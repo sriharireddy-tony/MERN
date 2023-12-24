@@ -1,7 +1,8 @@
-.flexBetween{
+.flexBetween {
     display: flex;
     justify-content: space-between;
 }
+
 .contestHeaderColor {
     background-color: blueviolet;
     color: white;
@@ -9,7 +10,87 @@
     padding-top: 12px;
     position: sticky;
     top: 0;
-  }
-  .cursor{
+}
+
+.cursor {
     cursor: pointer;
-  }
+}
+
+.row1 {
+    display: flex;
+    justify-content: center;
+    gap: 50px;
+    margin-top: 30px;
+}
+
+.row1 div {
+    color: blueviolet;
+    font-weight: bold;
+    cursor: pointer;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.imageIcon1 {
+    width: 55%;
+    border-radius: 50%;
+    position: relative;
+}
+
+.image {
+    display: flex;
+    align-items: center;
+    font-weight: bold;
+}
+
+.playerBox {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    cursor: pointer;
+}
+
+.playerBox .row {
+    width: 48%;
+    margin: 4px 5px;
+    border-radius: 5px;
+    box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
+    height: 60px;
+    /* background-color: aliceblue; */
+}
+
+.playerBox .row .image .imageIcon {
+    margin-top: 5px;
+}
+
+.flexAround {
+    display: flex;
+    justify-content: space-around
+}
+
+.teamNameTag {
+    position: absolute;
+    margin-top: 37px;
+    margin-left: -3px;
+    background: blueviolet;
+    height: 17px;
+    border-radius: 3px;
+    font-size: 12px;
+    color: aliceblue;
+    padding: 0px 2px;
+}
+
+.creditsDiv {
+    display: flex;
+    flex-direction: column;
+    margin-top: -10px;
+}
+
+.creditsDiv span:nth-child(1) {
+    font-size: 11px;
+}
+
+.creditsDiv span:nth-child(2) {
+    font-weight: bold;
+    margin-left: 10px
+}

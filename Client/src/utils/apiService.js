@@ -1,8 +1,10 @@
 const getMatchList = 'match/getMatchList';
-const getContestByRefId = `contest/getContestByRefId`;
+const getContestByRefId = 'contest/getContestByRefId';
+const getPlayerByRefId = 'player/getPlayerByRefId'
 
 
 export {
     getMatchList,
-    getContestByRefId
+    getContestByRefId,
+    getPlayerByRefId
 }

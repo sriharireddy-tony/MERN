@@ -20,8 +20,6 @@ const MatchesList = () => {
    axiosHttpHandler.get(getMatchList)
     .then((res) => {
         setMatchListArr(res.data);
-        console.log(res.data);
-        console.log(matchListArr);
     //   dispatch(getReduxMatchList(res.data))
     })
     .catch((err) => {

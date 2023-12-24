@@ -30,6 +30,12 @@
     box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
     width: 98%;
   }
+  .playerBox .row {
+    width: 97%;
+  }
+  .imageIcon1 {
+    width: 80%;
+  }
 }
 
 /* for laptops and PC */
@@ -39,6 +45,9 @@ and (max-width : 1024px) {
   .matchBody {
     display: flex;
     flex-flow: wrap ;
+  }
+  .imageIcon1 {
+    width: 80%;
   }
 }
 

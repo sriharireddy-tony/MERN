@@ -15,10 +15,11 @@
   }
   .contestCard {
     /* border: 1px solid #ddd; */
-    margin: 12px 5px;
+    margin: 7px 5px;
     border-radius: 8px;
     box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
     width: 48%;
+    cursor: pointer;
   }
   .matchCardRow {
     padding: 3px 0px;
@@ -45,7 +46,6 @@
   .matchCardRow2 {
     padding: 3px 0px;
     padding-left: 10px;
-    font-weight: bold;
     border: 1px solid #dddddd80;
     border-radius: 15px;
     margin: 3px 3px;
@@ -54,4 +54,10 @@
   .matchCardRow1 .text-end .btn-success{
     padding: 0px 20px;
     border-radius: 3px;
+  }
+  .matchCardRow2 .text1{
+font-size: 12px;
+  }
+  .matchCardRow2 .text{
+    color: black;
   }
