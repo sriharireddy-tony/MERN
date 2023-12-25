@@ -43,6 +43,6 @@ margin-top: 15px;
     margin-left: 5px;
 }
 .form-control, .form-select{
-    background-color: #ddd3;
-    border-radius: 15px;
+    /* background-color: #ddd3; */
+    border-radius: 5px;
 }

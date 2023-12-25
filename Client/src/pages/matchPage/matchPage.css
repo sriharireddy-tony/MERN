@@ -3,7 +3,7 @@
     justify-content: space-between;
   }
   
-  .row1 {
+  .row2 {
     display: flex;
     justify-content: center;
     gap: 30px;
@@ -18,8 +18,8 @@
     top: 0;
   }
   
-  .row1 div {
-    color: #ddd !important;
+  .row2 div {
+    color: #ddd;
     font-weight: bold;
     cursor: pointer;
     margin-bottom: 10px;

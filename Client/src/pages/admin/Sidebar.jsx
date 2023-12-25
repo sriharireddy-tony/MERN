@@ -1,78 +1,97 @@
-import React from 'react'
-import './admin.css'
-import AppBar from '@mui/material/AppBar';
-import Toolbar from '@mui/material/Toolbar';
-import Typography from '@mui/material/Typography';
-import IconButton from '@mui/material/IconButton';
-import MenuIcon from '@mui/icons-material/Menu';
-import Drawer from '@mui/material/Drawer';
-import List from '@mui/material/List';
-import ListItem from '@mui/material/ListItem';
-import HomeIcon from '@mui/icons-material/Home';
-import CloseIcon from '@mui/icons-material/Close';
-import GamesIcon from '@mui/icons-material/Games';
-import ContentPasteSearchIcon from '@mui/icons-material/ContentPasteSearch';
-import GroupAddIcon from '@mui/icons-material/GroupAdd';
+import React from "react";
+import "./admin.css";
+import Drawer from "@mui/material/Drawer";
+import List from "@mui/material/List";
+import ListItem from "@mui/material/ListItem";
+import HomeIcon from "@mui/icons-material/Home";
+import CloseIcon from "@mui/icons-material/Close";
+import GamesIcon from "@mui/icons-material/Games";
+import ContentPasteSearchIcon from "@mui/icons-material/ContentPasteSearch";
+import GroupAddIcon from "@mui/icons-material/GroupAdd";
+import ViewListIcon from "@mui/icons-material/ViewList";
+import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import { useLocation } from 'react-router-dom';
 
-const SidebarComp = ({onChildData}) => {
+const SidebarComp = ({ onChildData }) => {
 
-    const adminList = [{ 'icon': HomeIcon, 'name': 'Home' }, { 'icon': GamesIcon, 'name': 'Add Match' },
-    { 'icon': ContentPasteSearchIcon, 'name': 'Add Contest' }, { 'icon': GroupAddIcon, 'name': 'Add Players' }]
+    const location = useLocation();
 
-    const [open, setOpen] = React.useState(false);
-    const [listClick, setListClick] = React.useState('Home');
+const tabClickStyle = {
+    'paddingLeft': '15px',
+    'color': 'crimson',
+    'fontStyle': 'italic'
+};
 
-    const handleDrawerOpen = () => {
-        setOpen(true);
-    };
+  const adminList = [
+    { icon: HomeIcon, name: "Home", path: 'home' },
+    { icon: GamesIcon, name: "Add Match", path: 'addMatch' },
+    { icon: ContentPasteSearchIcon, name: "Add Contest", path: 'addContest' },
+    { icon: GroupAddIcon, name: "Add Players", path: 'addPlayers' },
+  ];
 
-    const handleDrawerClose = () => {
-        setOpen(false);
-    };
+  const [open, setOpen] = React.useState(false);
+  const [listClick, setListClick] = React.useState("Home");
 
-    const tabClick = (name)=> {
-        onChildData(name)
-        setListClick(name)
-        handleDrawerClose();
-    }
 
-    React.useEffect(() => {
-        
-    },[])
 
-    return (
-        <div>
-            <AppBar position="static">
-                <Toolbar>
-                    <IconButton color="inherit" edge="start" onClick={handleDrawerOpen}>
-                        <MenuIcon />
-                    </IconButton>
-                    <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-                        Application Title
-                    </Typography>
-                </Toolbar>
-            </AppBar>
+  const handleDrawerOpen = () => {
+    setOpen(true);
+  };
 
-            <Drawer open={open} onClose={handleDrawerClose} className='sideBar'>
-                <List>
-                    <div className="title">
-                        <h5>MERN11 Admin</h5><CloseIcon onClick={handleDrawerClose} />
-                    </div>
+  const handleDrawerClose = () => {
+    setOpen(false);
+  };
 
-                    <ListItem style={{ display: 'block' }}>
-                        {
-                            adminList.map((item, i) => (
-                                <div key={i} className='list' onClick={()=>{tabClick(item.name)}}>
-                                    <item.icon /> <span>{item.name}</span>
-                                </div>
-                            ))
-                        }
+  const tabClick = (obj) => {
+    onChildData(obj.name);
+    setListClick(obj.path);
+    handleDrawerClose();
+  };
 
-                    </ListItem>
-                </List>
-            </Drawer>
+  React.useEffect(() => {
+    setListClick(location.pathname);
+  }, []);
+
+  return (
+    <div>
+
+      <div className="row adminHeadColor">
+        <div className="col-2" onClick={handleDrawerOpen}>
+          <ViewListIcon />
         </div>
-    );
-}
+        <div className="col-8 ">
+          <b>Admin Dashboard</b>
+        </div>
+        <div className="col-2 text-end">
+            <AccountCircleIcon />
+        </div>
+      </div>
+
+      <Drawer open={open} onClose={handleDrawerClose} className="sideBar">
+        <List>
+          <div className="title">
+            <h5>MERN11 Admin</h5>
+            <CloseIcon onClick={handleDrawerClose} />
+          </div>
+
+          <ListItem style={{ display: "block" }}>
+            {adminList.map((item, i) => (
+              <div
+                key={i}
+                className="list"
+                onClick={() => {
+                  tabClick(item);
+                }}
+                style={listClick.includes(item.path) ? tabClickStyle : {}}
+              >
+                <item.icon /> <span>{item.name}</span>
+              </div>
+            ))}
+          </ListItem>
+        </List>
+      </Drawer>
+    </div>
+  );
+};
 
 export default SidebarComp;

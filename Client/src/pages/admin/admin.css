@@ -28,3 +28,32 @@
     border-bottom: 1px solid #ddd;
     cursor: pointer;
 }
+
+.css-hyum1k-MuiToolbar-root {
+    min-height: 50px !important;
+}
+
+.adminHeadColor {
+    background-color: blueviolet;
+    color: white;
+    overflow-x: hidden;
+    position: sticky;
+    top: 0;
+    margin: 0px;
+    height: 50px;
+}
+
+.adminHeadColor .col-2:nth-child(1) {
+    padding-top: 10px;
+    cursor: pointer;
+}
+
+.adminHeadColor .col-8 {
+    text-align: center;
+    padding-top: 10px;
+    font-size: 20px;
+}
+
+.adminHeadColor .text-end {
+    margin-top: 10px;
+}

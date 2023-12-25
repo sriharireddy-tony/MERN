@@ -1,5 +1,6 @@
 import React from 'react'
 import SidebarComp from './Sidebar'
+import { Outlet } from 'react-router-dom';
 
 const AdminHome = () => {
 
@@ -12,7 +13,7 @@ const AdminHome = () => {
     return (
         <div>
             <SidebarComp onChildData={childTabClick} />
-            <h5>{tabname}</h5>
+            <Outlet></Outlet>
         </div>
     )
 }

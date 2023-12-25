@@ -33,7 +33,7 @@ const MatchPageHeader = () => {
             </b>
           </div>
         </div>
-        <div className="row1">
+        <div className="row2">
           <div
             onClick={() => {
               setTabClick("Cricket");

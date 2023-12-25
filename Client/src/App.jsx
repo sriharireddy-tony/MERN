@@ -13,6 +13,7 @@ import MatchListFootball from './pages/matchPage/matchListFootball';
 import ContestHeader from './pages/contestsList/contestHeader';
 import PlayerHeader from './pages/playersPage/playerHeader';
 import AdminHome from './pages/admin/AdminHome';
+import MatchForm from './pages/admin/matches/MatchForm';
 
 function App() {
   return (
@@ -29,8 +30,9 @@ function App() {
           </Route>
           <Route path="contestList/:_id" element={<ContestHeader />} />
           <Route path="playersList/:_id" element={<PlayerHeader />} />
-          <Route path="/admin" >
-            <Route path="home" element={<AdminHome />} />
+          <Route path="/admin" element={<AdminHome />}>
+            {/* <Route path="home" element={<AdminHome />} /> */}
+            <Route path="addMatch" element={<MatchForm />} />
           </Route>
         </Routes>
       </Router>
