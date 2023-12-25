@@ -1,0 +1,30 @@
+.sideBar .css-4t3x6l-MuiPaper-root-MuiDrawer-paper {
+    width: 200px;
+    background-color: aliceblue;
+}
+
+.sideBar .title {
+    display: flex;
+    justify-content: space-around;
+    margin: 12px 0px
+}
+
+.sideBar .title h5 {
+    color: brown;
+}
+
+.sideBar .title svg {
+    color: orangered;
+    margin-top: 2px;
+    cursor: pointer;
+}
+
+.sideBar .list span {
+    margin-left: 12px;
+}
+
+.sideBar .list {
+    padding: 10px 0px;
+    border-bottom: 1px solid #ddd;
+    cursor: pointer;
+}

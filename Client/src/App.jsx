@@ -12,23 +12,27 @@ import MatchListKabaddi from './pages/matchPage/matchListKabaddi';
 import MatchListFootball from './pages/matchPage/matchListFootball';
 import ContestHeader from './pages/contestsList/contestHeader';
 import PlayerHeader from './pages/playersPage/playerHeader';
+import AdminHome from './pages/admin/AdminHome';
 
 function App() {
   return (
     <div >
       <Router>
         <Routes>
-          <Route path="/" element={<Home/>} />
-          <Route path="auth/signUp" element={<SignUp/>} />
-          <Route path="auth/signIn" element={<SignIn/>} />
-          <Route path="/matchPage" element={<MatchPageHeader/>} >
-          <Route path="cricket" element={<MatchesList/>} />
-          <Route path="kabaddi" element={<MatchListKabaddi/>} />
-          <Route path="football" element={<MatchListFootball/>} />
-         </Route>
-         <Route path="contestList/:_id" element={<ContestHeader/>} />
-         <Route path="playersList/:_id" element={<PlayerHeader/>} />
- e        </Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="auth/signUp" element={<SignUp />} />
+          <Route path="auth/signIn" element={<SignIn />} />
+          <Route path="/matchPage" element={<MatchPageHeader />} >
+            <Route path="cricket" element={<MatchesList />} />
+            <Route path="kabaddi" element={<MatchListKabaddi />} />
+            <Route path="football" element={<MatchListFootball />} />
+          </Route>
+          <Route path="contestList/:_id" element={<ContestHeader />} />
+          <Route path="playersList/:_id" element={<PlayerHeader />} />
+          <Route path="/admin" >
+            <Route path="home" element={<AdminHome />} />
+          </Route>
+        </Routes>
       </Router>
     </div>
   )
