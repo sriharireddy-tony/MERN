@@ -5,3 +5,15 @@
 background-color: grey;
 color: aliceblue;
 }
+.flexEvenly{
+    display: flex;
+    justify-content: space-evenly;
+}
+.flexEvenly svg:nth-child(1){
+    color: blue;
+    cursor: pointer;
+}
+.flexEvenly svg:nth-child(2){
+    color: red;
+    cursor: pointer;
+}

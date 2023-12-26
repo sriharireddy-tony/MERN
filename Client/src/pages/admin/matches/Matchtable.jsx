@@ -1,22 +1,17 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState,memo } from "react";
 import "./Match.css";
-import axiosHttpHandler from "../../../services/AxiosHttpHandler";
-import { getMatchList } from "../../../utils/apiService";
+import EditIcon from '@mui/icons-material/Edit';
+import DeleteIcon from '@mui/icons-material/Delete';
 
 const Matchtable = () => {
   const [matchList, setMatchList] = useState([]);
 
-  useEffect(() => {
-    axiosHttpHandler
-      .get(getMatchList)
-      .then((res) => {
-        setMatchList(res.data);
-        //   dispatch(getReduxMatchList(res.data))
-      })
-      .catch((err) => {
-        console.error("Error fetching data:", err);
-      });
-  }, []);
+console.log('tableTop');
+
+//   useEffect(()=> {
+//     setMatchList(prop.matchList)
+//     // console.log('tableuseEffect');
+//   },[prop])
 
   return (
     <div>
@@ -32,6 +27,7 @@ const Matchtable = () => {
             <th scope="col">Sport Name</th>
             <th scope="col">Start Time</th>
             <th scope="col">LineUps</th>
+            <th scope="col"></th>
           </tr>
         </thead>
         <tbody>
@@ -46,6 +42,10 @@ const Matchtable = () => {
               <td>{item.sportName}</td>
               <td>{item.matchStartTime}</td>
               <td>{item.isLineupsOut}</td>
+              <td className="flexEvenly">
+                <EditIcon onClick={()=>console.log('clicked')} />
+                <DeleteIcon />
+              </td>
             </tr>
           ))}
         </tbody>
@@ -54,4 +54,4 @@ const Matchtable = () => {
   );
 };
 
-export default Matchtable;
+export default memo(Matchtable);

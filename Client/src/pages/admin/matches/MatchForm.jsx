@@ -1,11 +1,25 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./Match.css";
 import Matchtable from "./Matchtable";
 import axiosHttpHandler from "../../../services/AxiosHttpHandler";
-import { createMatch } from "../../../utils/apiService";
+import { createMatch,getMatchList } from "../../../utils/apiService";
+import { useMemo } from "react";
 
 const MatchForm = () => {
-  const [addMatch, setAddMatch] = useState({
+//   const [addMatch, setAddMatch] = useState({
+//     teamName1: "",
+//     teamName2: "",
+//     teamCode1: "",
+//     teamCode2: "",
+//     teamImage1: "",
+//     teamImage2: "",
+//     leagueName: "",
+//     matchStartTime: "",
+//     sportName: "",
+//     isLineupsOut: "",
+//   });
+
+const [addMatch, setAddMatch] = useState(useMemo(()=>( {
     teamName1: "",
     teamName2: "",
     teamCode1: "",
@@ -15,13 +29,16 @@ const MatchForm = () => {
     leagueName: "",
     matchStartTime: "",
     sportName: "",
-    isLineupsOut: "",
-  });
+    isLineupsOut: ""
+}),[]))
+
+  const [matchList, setMatchList] = useState([]);
 
   const handleOnChange = (e) => {
     setAddMatch({ ...addMatch, [e.target.id]: e.target.value });
   };
 
+  console.log('formTop');
   const addMatchHandler = () => {
     if (
       !addMatch.teamName1 ||
@@ -33,16 +50,35 @@ const MatchForm = () => {
       !addMatch.sportName ||
       !addMatch.isLineupsOut
     ) {
+     alert('Enter all mandatory fields')
       return;
     }
     axiosHttpHandler.post(createMatch,addMatch)
       .then((res) => {
         alert("Saved", res);
+        getList();
       })
       .catch((err) => {
         alert("Error", err);
       });
   };
+
+  useEffect(()=>{
+    getList();
+  },[])
+
+  const getList = () => {
+    axiosHttpHandler
+      .get(getMatchList)
+      .then((res) => {
+        setMatchList(res.data);
+        
+      })
+      .catch((err) => {
+        console.error("Error fetching data:", err);
+      });
+  };
+
 
   return (
     <div>
@@ -170,8 +206,8 @@ const MatchForm = () => {
         </div>
       </form>
 
-      <div className="mx-3">
-        <Matchtable />
+      <div className="mx-3 mt-4">
+        <Matchtable matchList={matchList}/>
       </div>
     </div>
   );
