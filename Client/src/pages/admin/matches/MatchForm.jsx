@@ -72,7 +72,6 @@ const [addMatch, setAddMatch] = useState(useMemo(()=>( {
       .get(getMatchList)
       .then((res) => {
         setMatchList(res.data);
-        
       })
       .catch((err) => {
         console.error("Error fetching data:", err);

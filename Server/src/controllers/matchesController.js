@@ -24,7 +24,7 @@ deleteMatch = async (req, res, next) => {
         const deletedMatch = await matchesModel.findByIdAndDelete(id);
 
         if (deletedMatch && deletedMatch._id) {
-           return SuccessHandler(200, 'Match deleted successfull', [])(req, res);
+           return SuccessHandler(200, 'Match deleted successfull', deletedMatch)(req, res);
         } else {
            return SuccessHandler(404, 'Match not found!', [])(req, res);
         }
