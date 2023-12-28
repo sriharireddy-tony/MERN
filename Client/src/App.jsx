@@ -14,6 +14,7 @@ import ContestHeader from './pages/contestsList/contestHeader';
 import PlayerHeader from './pages/playersPage/playerHeader';
 import AdminHome from './pages/admin/AdminHome';
 import MatchForm from './pages/admin/matches/MatchForm';
+import ContestForm from './pages/admin/contests/ContestForm';
 
 function App() {
   return (
@@ -33,6 +34,7 @@ function App() {
           <Route path="/admin" element={<AdminHome />}>
             {/* <Route path="home" element={<AdminHome />} /> */}
             <Route path="addMatch" element={<MatchForm />} />
+            <Route path="addContest" element={<ContestForm />} />
           </Route>
         </Routes>
       </Router>
