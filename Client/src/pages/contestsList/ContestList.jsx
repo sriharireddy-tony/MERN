@@ -30,7 +30,7 @@ const ContestList = () => {
         <div className='matchBody'>
         {contestList.length !=0 && contestList.map((contest, index) => (
 
-            <div key={index} className="contestCard" onClick={()=>navigate(`/playersList/${contest._id}`)}>
+            <div key={index} className="contestCard" onClick={()=>navigate(`/playersList/${contest.matchModelId}`)}>
                 <div className="matchCardRow">
                     <div className="col-12">
                         Max Prize Pool

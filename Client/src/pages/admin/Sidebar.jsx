@@ -10,11 +10,12 @@ import ContentPasteSearchIcon from "@mui/icons-material/ContentPasteSearch";
 import GroupAddIcon from "@mui/icons-material/GroupAdd";
 import ViewListIcon from "@mui/icons-material/ViewList";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 const SidebarComp = ({ onChildData }) => {
 
     const location = useLocation();
+    const navigate = useNavigate();
 
 const tabClickStyle = {
     'paddingLeft': '15px',
@@ -45,6 +46,7 @@ const tabClickStyle = {
   const tabClick = (obj) => {
     onChildData(obj.name);
     setListClick(obj.path);
+    navigate(`${obj.path}`)
     handleDrawerClose();
   };
 

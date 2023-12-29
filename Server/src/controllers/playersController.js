@@ -42,7 +42,7 @@ deletePlayer = async (req, res, next) => {
 getPlayerByRefId = async(req,res,next) =>{
     try{
         const refId = req.params.refId;
-        const Players = await playersModel.find({contestModelId : refId})
+        const Players = await playersModel.find({matchModelId : refId})
             return SuccessHandler(200, 'Players getting successfull', Players)(req, res);
     } catch(err){
         next(err);

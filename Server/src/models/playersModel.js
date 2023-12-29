@@ -36,7 +36,7 @@ const playersSchema = new mongoose.Schema({
         type : Date,
         default : new Date()
     },
-    contestModelId: { type: mongoose.Schema.Types.ObjectId, ref: 'contestsList' }
+    matchModelId: { type: mongoose.Schema.Types.ObjectId, ref: 'matchesList' }
 })
 
 module.exports = mongoose.model('playersList', playersSchema)
