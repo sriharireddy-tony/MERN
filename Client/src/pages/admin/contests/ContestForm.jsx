@@ -1,53 +1,80 @@
-import React, { useEffect } from 'react'
+/* eslint-disable no-unused-vars */
+import React, { useEffect, useState } from 'react'
 import ContestTable from './ContestTable';
+import axiosHttpHandler from '../../../services/AxiosHttpHandler';
+import { getMatchList, createContest, getContestByRefId } from '../../../utils/apiService';
 
 const ContestForm = () => {
 
-    const [matchesArr, setMatchesArr] = React.useState([{ name: 'INDvsAUS' }, { name: 'ENGvsPAK' }, { name: 'BANvsNZ' }])
+    const [matchesArr, setMatchesArr] = React.useState([])
+    const [contestList, setContestList] = useState([]);
 
     const [addContest, setAddContest] = React.useState({
-        teamName1: "",
-        teamName2: "",
-        teamCode1: "",
-        teamCode2: "",
-        teamImage1: "",
-        teamImage2: "",
-        leagueName: "",
-        matchStartTime: "",
-        sportName: "",
-        isLineupsOut: ""
+        contestEntry: "",
+        contestSize: "",
+        contestFilledsize: "",
+        firstPrize: "",
+        contestWinPercentage: "",
+        teamsUpto: "",
+        isDiscount: "",
+        discountEntry: ""
     })
+
+    useEffect(() => {
+        getMatchListHandler();
+        getContestList();
+    }, [])
 
     const handleOnChange = (e) => {
         setAddContest({ ...addContest, [e.target.id]: e.target.value });
     };
 
-    const matchSelect = (e) => {
-        console.log(e);
-    }
-
     const addContestHandler = () => {
-
+        axiosHttpHandler.post(createContest, addContest).then(res => {
+            alert("Contest Saved", res);
+            getContestList();
+        }).catch((err) => {
+            console.log('Contest Saving Failed', err);
+        })
     }
 
-    useEffect(() => {
-        console.log(matchesArr);
-    }, [])
+
+    const getMatchListHandler = () => {
+        axiosHttpHandler
+            .get(getMatchList)
+            .then((res) => {
+                const matchList = res.data.map((data) => {
+                    return {
+                        teamName: `${data.teamCode1} vs ${data.teamCode2}`,
+                        _id: `${data._id}`
+                    }
+                })
+                setMatchesArr(matchList);
+            })
+            .catch((err) => {
+                console.error("Error fetching data:", err);
+            });
+    };
+
+    const getContestList = () => {
+        axiosHttpHandler.get(getContestByRefId+`/6565e1a6f155a31b05793cd4`).then(res => {
+            setContestList(res.data);
+        }).catch((err) => {
+            console.log('Getting Contests Failed', err);
+        })
+    }
 
     return (
         <div>
             <form className="addMatch">
                 <div className="form-row row">
                     <div className="form-group col-md-3">
-                        <label htmlFor="selectMatch">Select Match</label>
+                        <label htmlFor="matchModelId">Select Match</label>
                         {
-                            matchesArr.length != 0 && <select
-                                className="form-control"
-                                id="selectMatch"
-                            >
+                            <select className="form-control" id="matchModelId" onChange={handleOnChange}>
                                 <option value=''>--Select--</option>
-                                {matchesArr.map((item,i) => {
-                                   return <option key={i} value={item.name}>{item.name}</option>
+                                {matchesArr.map((item, i) => {
+                                    return <option key={i} value={item._id}>{item.teamName}</option>
                                 })
                                 }
                             </select>
@@ -55,41 +82,41 @@ const ContestForm = () => {
 
                     </div>
                     <div className="form-group col-md-3">
-                        <label htmlFor="teamName1">Team Name1</label>
+                        <label htmlFor="contestEntry">Contest Entry</label>
                         <input
                             type="text"
                             className="form-control"
-                            id="teamName1"
+                            id="contestEntry"
                             placeholder="Enter Team Name1"
                             onChange={handleOnChange}
                         />
                     </div>
                     <div className="form-group col-md-3">
-                        <label htmlFor="teamName2">Team Name2</label>
+                        <label htmlFor="contestSize">Contest Size</label>
                         <input
                             type="text"
                             className="form-control"
-                            id="teamName2"
+                            id="contestSize"
                             placeholder="Enter Team Name2"
                             onChange={handleOnChange}
                         />
                     </div>
                     <div className="form-group col-md-3">
-                        <label htmlFor="teamCode1">Team Code1</label>
+                        <label htmlFor="contestFilledsize">Contest Filled Size</label>
                         <input
                             type="text"
                             className="form-control"
-                            id="teamCode1"
+                            id="contestFilledsize"
                             placeholder="Enter Team Code1"
                             onChange={handleOnChange}
                         />
                     </div>
                     <div className="form-group col-md-3">
-                        <label htmlFor="teamCode2">Team Code2</label>
+                        <label htmlFor="firstPrize">First Prize</label>
                         <input
                             type="text"
                             className="form-control"
-                            id="teamCode2"
+                            id="firstPrize"
                             placeholder="Enter Team Code2"
                             onChange={handleOnChange}
                         />
@@ -98,76 +125,53 @@ const ContestForm = () => {
 
         <div className="form-row row"> */}
                     <div className="form-group col-md-3">
-                        <label htmlFor="teamImage1">Team Image1</label>
+                        <label htmlFor="contestWinPercentage">Win %</label>
                         <input
                             type="text"
                             className="form-control"
-                            id="teamImage1"
+                            id="contestWinPercentage"
                             onChange={handleOnChange}
                         />
                     </div>
                     <div className="form-group col-md-3">
-                        <label htmlFor="teamImage2">Team Image2</label>
+                        <label htmlFor="teamsUpto">Teams UpTo</label>
                         <input
                             type="text"
                             className="form-control"
-                            id="teamImage2"
-                            onChange={handleOnChange}
-                        />
-                    </div>
-                    <div className="form-group col-md-3">
-                        <label htmlFor="inputZleagueNameip">League Name</label>
-                        <input
-                            type="text"
-                            className="form-control"
-                            id="leagueName"
-                            placeholder="Enter League Name"
-                            onChange={handleOnChange}
-                        />
-                    </div>
-                    <div className="form-group col-md-3">
-                        <label htmlFor="matchStartTime">Match Start Time</label>
-                        <input
-                            type="text"
-                            className="form-control"
-                            id="matchStartTime"
+                            id="teamsUpto"
                             onChange={handleOnChange}
                         />
                     </div>
                     {/* </div>
         <div className="form-group row"> */}
                     <div className="form-group col-md-3">
-                        <label htmlFor="sportName">Sport Name</label>
+                        <label htmlFor="isDiscount">Is Discount</label>
                         <select
                             className="form-control"
-                            id="sportName"
+                            id="isDiscount"
                             onChange={handleOnChange}
                         >
                             <option value="">--Select--</option>
-                            <option value="Cricket">Cricket</option>
-                            <option value="Kabaddi">Kabaddi</option>
-                            <option value="Football">Football</option>
+                            <option value="Yes">Yes</option>
+                            <option value="No">No</option>
                         </select>
                     </div>
                     <div className="form-group col-md-3">
-                        <label htmlFor="isLineupsOut">is Lineups Out</label>
-                        <select
+                        <label htmlFor="discountEntry">Discount Entry</label>
+                        <input
+                            type="text"
                             className="form-control"
-                            id="isLineupsOut"
+                            id="discountEntry"
                             onChange={handleOnChange}
-                        >
-                            <option value="">--Select--</option>
-                            <option value="YES">YES</option>
-                            <option value="NO">NO</option>
-                        </select>
+                        />
                     </div>
                     <div className="form-group col-md-3 text-center">
                         <button
                             type="button"
                             className="btn btn-primary mt-4"
-                            onClick={() => addContestHandler}
+                            onClick={addContestHandler}
                         >
-                            Add Match
+                            Add Contest
                         </button>
                         <button type="button" className="btn btn-outline-danger mt-4 ms-3">
                             Clear
@@ -175,8 +179,9 @@ const ContestForm = () => {
                     </div>
                 </div>
             </form>
-
-            <ContestTable />
+            <div className="mx-3 mt-4">
+            <ContestTable contestList ={contestList}/>
+            </div>
         </div>
     )
 }

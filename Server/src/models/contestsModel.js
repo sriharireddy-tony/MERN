@@ -7,7 +7,7 @@ const contestsSchema = new mongoose.Schema({
     },
     isDiscount : {
         type : Boolean,
-        default : false
+        default : 'No'
     },
     discountEntry : {
         type : Number

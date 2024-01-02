@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import "./Match.css";
 import Matchtable from "./Matchtable";
 import axiosHttpHandler from "../../../services/AxiosHttpHandler";

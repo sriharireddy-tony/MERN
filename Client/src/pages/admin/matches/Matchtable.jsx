@@ -1,5 +1,5 @@
 /* eslint-disable react-refresh/only-export-components */
-import React, { useEffect, useState, memo } from "react";
+import { useEffect, useState, memo } from "react";
 import "./Match.css";
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
@@ -8,8 +8,6 @@ import { deleteMatch } from "../../../utils/apiService";
 
 const Matchtable = (prop) => {
     const [matchList, setMatchList] = useState([]);
-
-    console.log('tableTop');
 
     useEffect(() => {
         setMatchList(prop.matchList)
