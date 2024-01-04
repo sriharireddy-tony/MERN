@@ -1,34 +1,19 @@
-/* eslint-disable react-refresh/only-export-components */
-import { useEffect, useState, memo } from 'react';
+import { useEffect, useState } from "react";
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
-import axiosHttpHandler  from '../../../services/AxiosHttpHandler';
-import { deleteContest } from '../../../utils/apiService';
 
-const ContestTable = (prop) => {
 
-    const [contestList, setContestList] = useState([]);
+const PlayerTable = (prop) => {
 
-    useEffect(()=> {
-        setContestList(prop.contestList);
-    },[prop])
+    const [playersList, setPlayersList] = useState([]);
 
-    const deleteMatchHandler = (id)=>{
-        axiosHttpHandler.delete(deleteContest + `/${id}`).then((res) => {
-            const copyArr = [...contestList];
-            contestList.forEach((item,i)=> {
-                if(item._id == res.data._id){
-                    copyArr.splice(i,1);
-                }
-            })
-            console.log(copyArr);
-            console.log(contestList);
-            setContestList(copyArr);
-            alert("Deleted", res);
-        }).catch((err) => {
-            alert('Error', err)
-        })
-    }
+useEffect(()=>{
+    setPlayersList(prop.playersList)
+},[prop.playersList])
+
+const deletePlayerHandler = ()=> {
+
+}
 
   return (
     <div style={{overflow: 'auto'}}>
@@ -48,7 +33,7 @@ const ContestTable = (prop) => {
             </tr>
         </thead>
         <tbody>
-            {contestList.length != 0 && contestList.map((item, i) => (
+            {playersList.length != 0 && playersList.map((item, i) => (
                 <tr key={i}>
                     <td>{i + 1}</td>
                     <td>{item.contestEntry}</td>
@@ -61,7 +46,7 @@ const ContestTable = (prop) => {
                     <td>{item.discountEntry}</td>
                     <td className="flexEvenly">
                         <EditIcon  />
-                        <DeleteIcon onClick={()=> deleteMatchHandler(item._id)}/>
+                        <DeleteIcon onClick={()=> deletePlayerHandler(item._id)}/>
                     </td>
                 </tr>
             ))}
@@ -71,4 +56,4 @@ const ContestTable = (prop) => {
   )
 }
 
-export default memo(ContestTable);
+export default PlayerTable;

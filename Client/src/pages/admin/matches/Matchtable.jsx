@@ -29,7 +29,7 @@ const Matchtable = (prop) => {
     }
 
     return (
-        <div>
+        <div style={{overflow: 'auto'}}>
             <table className="table table-striped matchTable">
                 <thead className="thead-dark">
                     <tr>

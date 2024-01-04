@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from 'react'
 import ContestTable from './ContestTable';
 import axiosHttpHandler from '../../../services/AxiosHttpHandler';
-import { getMatchList, createContest, getContestByRefId } from '../../../utils/apiService';
+import { getMatchList, createContest, getContestByRefId, getContests } from '../../../utils/apiService';
 
 const ContestForm = () => {
 
@@ -20,13 +20,29 @@ const ContestForm = () => {
         discountEntry: ""
     })
 
+    // var contests =[];
+
     useEffect(() => {
         getMatchListHandler();
         getContestList();
-    }, [])
+    },[])
 
-    const handleOnChange = (e) => {
-        setAddContest({ ...addContest, [e.target.id]: e.target.value });
+    const handleOnChange = async (e) => {
+        if (e.target.id == 'matchModelId') {
+          try{
+            const res = await axiosHttpHandler.get(getContestByRefId+`/${e.target.value}`);
+            setContestList(res.data);
+          } catch(err){
+            console.log('Getting Contests by Ref Id Failed', err);
+          }
+           return;
+        }
+        if (e.target.id == 'contestEntry' || e.target.id == 'discountEntry' || e.target.id == 'contestSize' || e.target.id == 'contestFilledsize'
+            || e.target.id == 'firstPrize' || e.target.id == 'contestWinPercentage' || e.target.id == 'teamsUpto') {
+            setAddContest({ ...addContest, [e.target.id]: +e.target.value });
+        } else {
+            setAddContest({ ...addContest, [e.target.id]: e.target.value });
+        }
     };
 
     const addContestHandler = () => {
@@ -56,13 +72,15 @@ const ContestForm = () => {
             });
     };
 
-    const getContestList = () => {
-        axiosHttpHandler.get(getContestByRefId+`/6565e1a6f155a31b05793cd4`).then(res => {
+    const getContestList = async () => {
+        try {
+            const res = await axiosHttpHandler.get(getContests);
             setContestList(res.data);
-        }).catch((err) => {
+        } catch (err) {
             console.log('Getting Contests Failed', err);
-        })
-    }
+            // Handle error (show a message to the user, etc.)
+        }
+    };
 
     return (
         <div>
@@ -156,16 +174,18 @@ const ContestForm = () => {
                             <option value="No">No</option>
                         </select>
                     </div>
-                    <div className="form-group col-md-3">
-                        <label htmlFor="discountEntry">Discount Entry</label>
-                        <input
-                            type="text"
-                            className="form-control"
-                            id="discountEntry"
-                            onChange={handleOnChange}
-                        />
-                    </div>
-                    <div className="form-group col-md-3 text-center">
+                    {addContest.isDiscount == 'Yes' &&
+                        <div className="form-group col-md-3">
+                            <label htmlFor="discountEntry">Discount Entry</label>
+                            <input
+                                type="text"
+                                className="form-control"
+                                id="discountEntry"
+                                onChange={handleOnChange}
+                            />
+                        </div>
+                    }
+                    <div className="form-group col-md-6 text-center">
                         <button
                             type="button"
                             className="btn btn-primary mt-4"
@@ -180,7 +200,7 @@ const ContestForm = () => {
                 </div>
             </form>
             <div className="mx-3 mt-4">
-            <ContestTable contestList ={contestList}/>
+                <ContestTable contestList={contestList} />
             </div>
         </div>
     )

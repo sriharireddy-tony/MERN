@@ -24,7 +24,7 @@ deleteContest = async (req, res, next) => {
         const deletedContest = await contestsModel.findByIdAndDelete(id);
 
         if (deletedContest && deletedContest._id) {
-           return SuccessHandler(200, 'Contest deleted successfull', [])(req, res);
+           return SuccessHandler(200, 'Contest deleted successfull', deletedContest)(req, res);
         } else {
            return SuccessHandler(404, 'Contest not found!', [])(req, res);
         }
