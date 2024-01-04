@@ -1,10 +1,12 @@
 import { configureStore } from '@reduxjs/toolkit';
-import matchListReducer from './actions/matchList'
+import matchListReducer from './createSlice/matchList'
+import matchListApiSlice from './createSlice/matchListApiSlice';
 
 
 const store = configureStore({
     reducer: {
-        match: matchListReducer
+        match: matchListReducer,
+        matchList: matchListApiSlice
     }
 })
 

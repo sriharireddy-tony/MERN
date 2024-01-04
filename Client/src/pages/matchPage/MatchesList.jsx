@@ -6,7 +6,7 @@ import image from '../../assets/Images/userPng1.jpg'
 import './matchPage.css'
 import axiosHttpHandler from '../../services/AxiosHttpHandler'
 import { getMatchList } from '../../utils/apiService'
-import { getReduxMatchList } from '../../redux/actions/matchList'
+import { getReduxMatchList } from '../../redux/createSlice/matchList'
 import { useDispatch } from 'react-redux'
 import { useNavigate,Link } from 'react-router-dom'
 
