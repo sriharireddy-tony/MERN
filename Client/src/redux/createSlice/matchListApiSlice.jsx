@@ -36,8 +36,8 @@ const matchListSlice =  createSlice({
         state.matchList = [];
         state.error = action.error.message;
       });
-  },
+  }
 });
 
 // export const {matchList, status, error} = matchListSlice.actions;
-export default matchListSlice.reducer;
+export const matchListApiSlice =  matchListSlice.reducer;
