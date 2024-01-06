@@ -6,3 +6,5 @@ export const deleteMatch = 'match/deleteMatch';
 export const createContest = 'contest/createContest';
 export const deleteContest = 'contest/deleteContest';
 export const getContests = 'contest/getContests';
+export const createPlayer = 'player/createPlayer';
+export const getPlayers = 'player/getPlayers';

@@ -25,17 +25,21 @@ const ContestForm = () => {
     useEffect(() => {
         getMatchListHandler();
         getContestList();
-    },[])
+    }, [])
 
     const handleOnChange = async (e) => {
         if (e.target.id == 'matchModelId') {
-          try{
-            const res = await axiosHttpHandler.get(getContestByRefId+`/${e.target.value}`);
-            setContestList(res.data);
-          } catch(err){
-            console.log('Getting Contests by Ref Id Failed', err);
-          }
-           return;
+            if (e.target.value) {
+                getContestList();
+            } else {
+                try {
+                    const res = await axiosHttpHandler.get(getContestByRefId + `/${e.target.value}`);
+                    setContestList(res.data);
+                } catch (err) {
+                    console.log('Getting Contests by Ref Id Failed', err);
+                }
+            }
+            return;
         }
         if (e.target.id == 'contestEntry' || e.target.id == 'discountEntry' || e.target.id == 'contestSize' || e.target.id == 'contestFilledsize'
             || e.target.id == 'firstPrize' || e.target.id == 'contestWinPercentage' || e.target.id == 'teamsUpto') {

@@ -21,14 +21,14 @@ const deletePlayerHandler = ()=> {
         <thead className="thead-dark">
             <tr>
                 <th scope="col">S.No</th>
-                <th scope="col">Contest Entry</th>
-                <th scope="col">Contest Size</th>
-                <th scope="col">Contest Filled Size</th>
-                <th scope="col">First Prize</th>
-                <th scope="col">Win %</th>
-                <th scope="col">Teams UpTo</th>
-                <th scope="col">Is Discount</th>
-                <th scope="col">Discount Entry</th>
+                <th scope="col">Player Name</th>
+                <th scope="col">Team Name</th>
+                <th scope="col">selected %</th>
+                <th scope="col">Is Played Match</th>
+                <th scope="col">Points</th>
+                <th scope="col">Credits</th>
+                <th scope="col">Role</th>
+                <th scope="col">Created On</th>
                 <th scope="col"></th>
             </tr>
         </thead>
@@ -36,14 +36,14 @@ const deletePlayerHandler = ()=> {
             {playersList.length != 0 && playersList.map((item, i) => (
                 <tr key={i}>
                     <td>{i + 1}</td>
-                    <td>{item.contestEntry}</td>
-                    <td>{item.contestSize}</td>
-                    <td>{item.contestFilledsize}</td>
-                    <td>{item.firstPrize}</td>
-                    <td>{item.contestWinPercentage}</td>
-                    <td>{item.teamsUpto}</td>
-                    <td>{item.isDiscount}</td>
-                    <td>{item.discountEntry}</td>
+                    <td>{item.playerName}</td>
+                    <td>{item.teamCode}</td>
+                    <td>{item.selectedPercent}</td>
+                    <td>{item.isPlayedLastMatch ? 'YES' : 'NO'}</td>
+                    <td>{item.Points}</td>
+                    <td>{item.credits}</td>
+                    <td>{item.role}</td>
+                    <td>{item.createdOn}</td>
                     <td className="flexEvenly">
                         <EditIcon  />
                         <DeleteIcon onClick={()=> deletePlayerHandler(item._id)}/>

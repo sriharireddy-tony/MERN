@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import React from "react";
 import "./admin.css";
 import Drawer from "@mui/material/Drawer";
