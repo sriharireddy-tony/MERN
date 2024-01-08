@@ -1,0 +1,17 @@
+#adminPlayer th{
+    background-color: gray;
+    color: white;
+}
+
+#adminPlayer th div span :nth-child(1), #adminPlayer th div span :nth-child(2)  {
+    color: white;
+}
+
+#adminPlayer table tbody tr:nth-child(odd) {
+    background-color: #f2f2f2;
+  }
+
+  /* CSS for even rows */
+  #adminPlayer table tbody tr:nth-child(even) {
+    background-color: #ffffff;
+  }

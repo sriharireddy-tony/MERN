@@ -12,7 +12,7 @@ const AdminHome = () => {
 
     return (
         <div>
-            <SidebarComp onChildData={childTabClick} />
+            {/* <SidebarComp onChildData={childTabClick} /> */}
             <Outlet></Outlet>
         </div>
     )
