@@ -14,49 +14,62 @@ const PlayerList = () => {
 
     const params = useParams();
     const [playersList, setPlayersList] = useState([]);
+    const [playersFilterList, setplayersFilterList] = useState([]);
 
     useEffect(() => {
         axiosHttpHandler.get(getPlayerByRefId + `/${params._id}`).then((res) => {
-            setPlayersList(res.data);
-            console.log(res.data);
+          const arr =  res.data.map((data) => {
+                let char = '';
+                data.teamCode.split(' ').forEach((item) => {
+                  let char1 = item.charAt(0)
+                    char += char1;
+                })
+                return {
+                    ...data,
+                    code: char
+                }
+            })
+            setPlayersList(arr);
+            setplayersFilterList(arr);
+            tabClickHandler('Wicket-Keeper');
         }).catch((err) => {
             console.error('Error fetching data:', err);
-        });
-    }, [params])
+        });1
+    }, [params,tabClick])
 
-    const [tabClick, setTabClick] = useState('WK');
+    const tabClickHandler = (role)=>{
+        setTabClick(role);
+        console.log(playersFilterList);
+      const result = playersFilterList.filter((data)=> data.role == role );
+      console.log(result);
+      setPlayersList(result);
+    }
+
+    const [tabClick, setTabClick] = useState();
     return (
         <div>
             <div className="row1">
                 <div
-                    onClick={() => {
-                        setTabClick("WK");
-                    }}
-                    style={tabClick === "WK" ? active : {}}
+                    onClick={() => {tabClickHandler('Wicket-Keeper')}}
+                    style={tabClick === "Wicket-Keeper" ? active : {}}
                 >
                     WK
                 </div>
                 <div
-                    onClick={() => {
-                        setTabClick("BAT");
-                    }}
-                    style={tabClick === "BAT" ? active : {}}
+                    onClick={() => {tabClickHandler('Batting')}}
+                    style={tabClick === "Batting" ? active : {}}
                 >
                     BAT
                 </div>
                 <div
-                    onClick={() => {
-                        setTabClick("AR");
-                    }}
-                    style={tabClick === "AR" ? active : {}}
+                    onClick={() => {tabClickHandler('All-Rounder')}}
+                    style={tabClick === "All-Rounder" ? active : {}}
                 >
                     AR
                 </div>
                 <div
-                    onClick={() => {
-                        setTabClick("BOWL");
-                    }}
-                    style={tabClick === "BOWL" ? active : {}}
+                    onClick={() => {tabClickHandler('Bowling')}}
+                    style={tabClick === "Bowling" ? active : {}}
                 >
                     BOWL
                 </div>
@@ -67,7 +80,7 @@ const PlayerList = () => {
                     <div key={i} className="row">
                         <div className="image col-2">
                             <img src={image} alt="teamIcon" className="imageIcon1" />
-                            <span className="teamNameTag">{item.teamCode}</span>
+                            <span className="teamNameTag">{item.code}</span>
                         </div>
                         <div className="col-5 mt-2">
                             <b className="mb-0">{item.playerName}</b>

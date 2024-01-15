@@ -4,10 +4,10 @@ const SuccessHandler = require('../middlewares/successHandler');
 
 createPlayer = async (req, res, next) => {
    const pName = req.body.playerName;
-   const isPNameUnique = await playersModel.find({playerName : pName})
-   if(isPNameUnique && isPNameUnique._id){
-    return SuccessHandler(409, 'Player name already exists!', [])(req, res)
-   }
+//    const isPNameUnique = await playersModel.find({playerName : pName})
+//    if(isPNameUnique && isPNameUnique._id){
+//     return SuccessHandler(409, 'Player name already exists!', [])(req, res)
+//    }
     await playersModel.create(req.body).then(PlayerRes => {
         return SuccessHandler(200, 'Data saved successfully', PlayerRes)(req, res)
     }).catch(err => {

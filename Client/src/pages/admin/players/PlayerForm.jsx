@@ -8,7 +8,7 @@ import { createPlayer, getPlayers, getPlayerByRefId } from "../../../utils/apiSe
 
 const PlayerForm = () => {
     let teamCode = [];
-    const roles = ['Batting', 'Bowling', 'All-Rounder', 'Umpire']
+    const roles = ['Batting', 'Bowling', 'All-Rounder', 'Wicket-Keeper']
 
     const dispatch = useDispatch();
 

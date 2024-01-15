@@ -17,7 +17,8 @@ const ContestForm = () => {
         contestWinPercentage: "",
         teamsUpto: "",
         isDiscount: "",
-        discountEntry: ""
+        discountEntry: "",
+        matchModelId : ""
     })
 
     // var contests =[];
@@ -29,6 +30,7 @@ const ContestForm = () => {
 
     const handleOnChange = async (e) => {
         if (e.target.id == 'matchModelId') {
+            setAddContest({...addContest, matchModelId : e.target.value})
             if (e.target.value) {
                 getContestList();
             } else {
