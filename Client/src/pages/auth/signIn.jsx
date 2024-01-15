@@ -26,7 +26,7 @@ const SignIn = () => {
           credentials
         );
         const response = sendSignIn.data;
-        login(response.userName);
+        login(response.accessToken);
         if (response.role == "User") {
           navigate("/matchPage/cricket");
           sessionStorage.setItem('accessToken', response.accessToken);

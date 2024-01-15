@@ -16,6 +16,11 @@ const MatchPageHeader = () => {
   const [tabClick, setTabClick] = useState("Cricket");
   const navigate = useNavigate();
 
+ const logout = ()=>{
+  navigate('/');
+  sessionStorage.clear();
+  }
+
   return (
     <div>
       <div className="headerColor">
@@ -29,7 +34,7 @@ const MatchPageHeader = () => {
           <div className="col-4 text-end">
             <b className="headIcons">
               <NotificationsIcon />
-              <GroupsIcon />
+              <GroupsIcon onClick={()=> logout()}/>
             </b>
           </div>
         </div>

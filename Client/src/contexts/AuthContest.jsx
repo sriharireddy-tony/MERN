@@ -5,8 +5,8 @@ const AuthContext = React.createContext();
 
 // eslint-disable-next-line react/prop-types
 export const AuthProvider = ({ children }) => {
-
-    const [user, setUser] = useState(null);
+const accessToken = sessionStorage.getItem('accessToken');
+    const [user, setUser] = useState(accessToken);
 
     const login = (user) => {
         setUser(user);

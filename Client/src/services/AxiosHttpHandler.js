@@ -1,9 +1,13 @@
 import axios from 'axios';
 
+const accessToken = sessionStorage.getItem('accessToken');
+
 const axiosHttpHandler = axios.create({
+
   baseURL: 'http://localhost:3000/',
   headers: {
     'Content-Type': 'application/json',
+    'Authorization':`Bearer ${accessToken}`
     // Add any other default headers here
   },
 });
@@ -26,6 +30,8 @@ axiosHttpHandler.interceptors.response.use(
     return response.data;
   },
   (error) => {
+  
+
     // Handle error responses
     return Promise.reject(error);
   }
