@@ -82,7 +82,15 @@ register = async (req, res) => {
     }
   }
 
+  refreshToken = (req, res)=> {
+    console.log(req);
+    const { id, name, role } = req.decodedRefreshToken;
+    const accessToken = jwt.sign({ id, name, role }, accessKey, { expiresIn: accessTime });
+    return res.status(200).json({ accessToken });
+  }
+
   module.exports = {
     register,
-    login
+    login,
+    refreshToken
   }

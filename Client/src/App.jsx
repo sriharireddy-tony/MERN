@@ -16,6 +16,7 @@ import AdminHome from './pages/admin/AdminHome';
 import MatchForm from './pages/admin/matches/MatchForm';
 import ContestForm from './pages/admin/contests/ContestForm';
 import PlayerForm from './pages/admin/players/PlayerForm';
+// import notFound404 from './components/notFound';
 
 import { ProtectRoute } from './utils/ProtectRoute';
 
@@ -27,8 +28,8 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="auth/signUp" element={<SignUp />} />
           <Route path="auth/signIn" element={<SignIn />} />
-          <Route path="/matchPage" element={<MatchPageHeader />} >
-            <ProtectRoute path="cricket" component={MatchesList } auth={true}/>
+          <Route path="/matchPage" element={ <MatchPageHeader />} >
+            <Route path="cricket" element={ <ProtectRoute><MatchesList /></ProtectRoute> }/>
             <Route path="kabaddi" element={<MatchListKabaddi />} />
             <Route path="football" element={<MatchListFootball />} />
           </Route>
@@ -40,7 +41,7 @@ function App() {
             <Route path="addContest" element={<ContestForm />} />
             <Route path="addPlayers" element={<PlayerForm />} />
           </Route>
-          {/* <Redirect to="/" /> */}
+          {/* <Route path="/*" element={ <notFound404 /> } /> */}
         </Routes>
       </Router>
     </div>

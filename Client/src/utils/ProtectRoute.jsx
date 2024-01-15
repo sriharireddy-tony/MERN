@@ -1,18 +1,17 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable no-unused-vars */
-import { Route } from "react-router-dom";
+import { useAuth } from "../contexts/AuthContest";
+import { Navigate } from "react-router-dom";
 
-export const ProtectRoute = ({ auth, component: Component, ...rest }) => {
-  return (
-    <Route
-      {...rest}
-      render={(props) => {
-        if (auth) return <Component {...props} {...rest} />;
-        // if (!auth)
-        //   return (
-        //     <Redirect to={{ path: "/", state: { from: props.location } }} />
-        //   );
-      }}
-    />
-  );
+export const ProtectRoute = ({children}) => {
+
+  const { user } = useAuth();
+
+  if(!user){
+   return <Navigate to="/" />
+  }
+
+  console.log(children);
+  return <>{children}</>;
+
 };

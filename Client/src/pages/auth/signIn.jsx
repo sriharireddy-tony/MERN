@@ -3,9 +3,12 @@ import HomeHeader from "../../components/homeHeader";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../contexts/AuthContest";
 
 const SignIn = () => {
   const navigate = useNavigate();
+  const { login } = useAuth();
+
   const [credentials, setCredentials] = useState({
     email: "",
     loginpassword: "",
@@ -23,6 +26,7 @@ const SignIn = () => {
           credentials
         );
         const response = sendSignIn.data;
+        login(response.userName);
         if (response.role == "User") {
           navigate("/matchPage/cricket");
           sessionStorage.setItem('accessToken', response.accessToken);

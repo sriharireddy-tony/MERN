@@ -9,12 +9,19 @@ import { getMatchList } from '../../utils/apiService'
 import { getReduxMatchList } from '../../redux/createSlice/matchList'
 import { useDispatch } from 'react-redux'
 import { useNavigate,Link } from 'react-router-dom'
+import { useAuth } from '../../contexts/AuthContest'
 
 const MatchesList = () => {
+
+    const data = useAuth();
+
+    console.log(data);
 
     const navigate = useNavigate();
     const dispatch = useDispatch();
     var [matchListArr, setMatchListArr] = useState([]);
+
+
 
   useEffect(()=>{
    axiosHttpHandler.get(getMatchList)
