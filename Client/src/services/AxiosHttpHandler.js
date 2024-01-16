@@ -1,13 +1,13 @@
 import axios from 'axios';
+import { refreshToken1 } from '../utils/apiService';
 
-const accessToken = sessionStorage.getItem('accessToken');
+const API_URL = 'http://localhost:3000/';
 
 const axiosHttpHandler = axios.create({
 
-  baseURL: 'http://localhost:3000/',
+  baseURL: API_URL,
   headers: {
-    'Content-Type': 'application/json',
-    'Authorization':`Bearer ${accessToken}`
+    'Content-Type': 'application/json'
     // Add any other default headers here
   },
 });
@@ -15,7 +15,10 @@ const axiosHttpHandler = axios.create({
 // Interceptors for request and response
 axiosHttpHandler.interceptors.request.use(
   (config) => {
-    // Modify request config (if needed) before sending the request
+    const accessToken = sessionStorage.getItem('accessToken');
+    if (accessToken) {
+      config.headers.Authorization = `Bearer ${accessToken}`
+    }
     return config;
   },
   (error) => {
@@ -29,9 +32,42 @@ axiosHttpHandler.interceptors.response.use(
     // Handle successful responses
     return response.data;
   },
-  (error) => {
-  
+  async (error) => {
+    // const navigate = useNavigate();
+    const request = error.config;
+    if (error.response.status === 401 && !request._retry) {
+      console.log('access Token expired');
+      request._retry = true;
+      try {
+        const refreshToken = sessionStorage.getItem('accessToken');
+        let payload = {
+          'token' :refreshToken
+        }
+        // const res = await axios.post(refreshToken, { refreshTok })
 
+        const res1 = await fetch(API_URL + refreshToken1, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            // Add any additional headers if needed
+          },
+          body: JSON.stringify(payload),
+        });
+        const res = await res1.json();
+console.log(res);
+
+        sessionStorage.setItem('accessToken', res.data.accessToken);
+        request.Authorization = `Bearer ${res.data.accessToken}`
+        console.log('Refresh Token generated');
+        // eslint-disable-next-line no-undef
+        return instance(request)
+
+      } catch (err) {
+        console.log('Refresh Token expired');
+        alert('session expired!');
+      // window.location.href = '/';
+      }
+    }
     // Handle error responses
     return Promise.reject(error);
   }

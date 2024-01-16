@@ -11,19 +11,22 @@ verifyAccessToken = async (req, res, next) => {
     const accessToken = req.headers.authorization.split(' ')[1];
     const accessSecretkey = process.env.ACCESS_KEY;
 
-    // try {
+    try {
         const decodedToken = jwt.verify(accessToken, accessSecretkey);
-        console.log(decodedToken);
         const currentTimestamp = Math.floor(Date.now() / 1000);
-
+        console.log(decodedToken.exp , currentTimestamp);
         if (decodedToken.exp < currentTimestamp) {
             return SuccessHandler(401, 'Access token has expired!', [])(req, res)
         }
-        req.decodedRefreshToken = decodedToken;
+        // req.decodedRefreshToken = decodedToken;
         next();
-    // } catch (err) {
-    //     next(err)
-    // }
+    } catch (err) {
+        if (err instanceof jwt.TokenExpiredError) {
+            return SuccessHandler(401, 'Access token has expired!', [])(req, res);
+          } else {
+            next(err);
+          }
+    }
 }
 
 module.exports = verifyAccessToken;

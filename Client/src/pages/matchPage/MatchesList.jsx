@@ -15,8 +15,6 @@ const MatchesList = () => {
 
     const data = useAuth();
 
-    console.log(data);
-
     const navigate = useNavigate();
     const dispatch = useDispatch();
     var [matchListArr, setMatchListArr] = useState([]);

@@ -8,3 +8,4 @@ export const deleteContest = 'contest/deleteContest';
 export const getContests = 'contest/getContests';
 export const createPlayer = 'player/createPlayer';
 export const getPlayers = 'player/getPlayers';
+export const refreshToken1 = 'auth/refreshToken';

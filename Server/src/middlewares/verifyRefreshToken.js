@@ -3,7 +3,6 @@ const jwt = require('jsonwebtoken');
 require('dotenv').config();
 
 verifyRefreshtoken = async (req, res, next) => {
-
     const refreshToken = req.body.token;
     const refreshSecretKey = process.env.REFRESH_KEY;
 
@@ -12,6 +11,7 @@ verifyRefreshtoken = async (req, res, next) => {
     }
 
     try {
+        console.log(req.body, refreshSecretKey);
         const decodedToken = jwt.verify(refreshToken, refreshSecretKey);
         const currentTimestamp = Math.floor(Date.now() / 1000);
 
@@ -21,7 +21,11 @@ verifyRefreshtoken = async (req, res, next) => {
         req.decodedRefreshToken = decodedToken;
         next();
     } catch (err) {
-        next(err)
+        if (err instanceof jwt.TokenExpiredError) {
+            return SuccessHandler(401, 'Refresh token has expired!', [])(req, res);
+        } else {
+            next(err);
+        }
     }
 }
 
